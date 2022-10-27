@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import fs from "fs";
 import ini from "ini";
 import os from "os";

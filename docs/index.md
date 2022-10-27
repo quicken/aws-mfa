@@ -9,3 +9,9 @@ To generate TypeDocs run:
 ```
 yarn docs
 ```
+
+To publish run:
+
+```
+yarn publish --access public
+```
