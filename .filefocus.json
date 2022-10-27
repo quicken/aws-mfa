@@ -1,0 +1,8 @@
+{
+  "store": [
+    {
+      "name": "Config",
+      "path": ["package.json", "src/index.ts"]
+    }
+  ]
+}

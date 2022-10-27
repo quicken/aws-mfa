@@ -1,0 +1,22 @@
+{
+    "tabWidth": 4,
+    "printWidth": 120,
+    "trailingComma": "none",
+    "useTabs": false,
+    "overrides": [
+        {
+            "files": "*.json",
+            "options": {
+                "tabWidth": 2,
+                "useTabs": false
+            }
+        },
+        {
+            "files": "*.md",
+            "options": {
+                "tabWidth": 2,
+                "useTabs": false
+            }
+        }
+    ]
+}
