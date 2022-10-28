@@ -2,7 +2,7 @@
   "name": "@herdingbits/awsmfa",
   "author": "Marcel Scherzer",
   "description": "Manages the AWS credentials file when working with MFA enabled accounts.",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "engines": {
     "node": ">=v16.15.1",
     "npm": ">=8.11.0"
@@ -16,6 +16,10 @@
   "bin": {
     "awsmfa": "./dist/index.js"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
   "repository": "git@github.com:quicken/aws-mfa.git",
   "license": "MIT",
   "dependencies": {
