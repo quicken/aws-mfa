@@ -96,9 +96,7 @@ export class ConfigTool {
         const schema: Schema = {
             properties: {
                 tokenCode: {
-                    description: colors.green(
-                        `Enter the token code displayed on your MFA device for root profile "${profile}"`
-                    ),
+                    description: colors.green(`MFA code for "${profile}"`),
                     pattern: /^\d{6}$/,
                     type: "string",
                     message: colors.red("The token must be exactly 6 digits."),
