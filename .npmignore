@@ -1,0 +1,10 @@
+.vscode/
+docs/
+.filefocus
+.npmrc
+.nvmrc
+.prettierrc
+jest.config.ts
+tsconfig.json
+typedoc.json
+.eslintrc.yml
