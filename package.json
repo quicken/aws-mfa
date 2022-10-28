@@ -1,13 +1,14 @@
 {
   "name": "@herdingbits/awsmfa",
-  "author": "Marcel Scherzer",
-  "description": "Manages the AWS credentials file when working with MFA enabled accounts.",
   "version": "1.0.0",
-  "engines": {
-    "node": ">=v16.15.1",
-    "npm": ">=8.11.0"
-  },
+  "description": "Manages the AWS credentials file when working with MFA enabled accounts.",
+  "license": "MIT",
+  "author": "Marcel Scherzer",
   "homepage": "https://www.herdingbits.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quicken/aws-mfa.git"
+  },
   "keywords": [
     "aws mfa",
     "herdingbits",
@@ -15,19 +16,27 @@
     "iam"
   ],
   "engineStrict": true,
+  "engines": {
+    "node": ">=v16.15.1",
+    "npm": ">=8.11.0"
+  },
   "main": "src/index.ts",
   "bin": {
     "awsmfa": "./dist/index.js"
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "types"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/quicken/aws-mfa.git"
+  "scripts": {
+    "build": "tsc",
+    "debug": "tsc && node --inspect ./dist/index.js",
+    "docs": "typedoc",
+    "start": "tsc && node ./dist/index.js",
+    "test": "jest"
   },
-  "license": "MIT",
+  "types": "./dist/index.d.ts",
   "dependencies": {
     "@aws-sdk/client-sts": "^3.197.0",
     "ini": "^3.0.1",
@@ -54,13 +63,5 @@
     "typedoc": "^0.23.18",
     "typedoc-plugin-markdown": "^3.11.14",
     "typescript": "^4.4.3"
-  },
-  "scripts": {
-    "test": "jest",
-    "start": "tsc && node ./dist/index.js",
-    "debug": "tsc && node --inspect ./dist/index.js",
-    "docs": "typedoc",
-    "build": "tsc"
-  },
-  "types": "./dist/index.d.ts"
+  }
 }

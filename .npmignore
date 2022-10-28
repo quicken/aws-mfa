@@ -1,10 +1,10 @@
-.vscode/
 docs/
-.filefocus
+.vscode/
+.eslintrc.yml
+.filefocus.json
 .npmrc
 .nvmrc
 .prettierrc
 jest.config.ts
 tsconfig.json
 typedoc.json
-.eslintrc.yml
