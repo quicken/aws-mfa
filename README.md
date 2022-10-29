@@ -69,13 +69,13 @@ awsmfa --help
 
 For a basic setup, add your serial number to the profile that is linked to your MFA device to your **~/.aws/credentials** file.
 
-For example:
+**~/.aws/credentials**
 
 ```ini
 [default]
-aws_access_key_id: "MYACCESSKEY000000000",
-aws_secret_access_key: "thisisthesecretaccesskey01234567890ABCDE",
-mfa_serial:"arn:aws:iam::012345678901:mfa/myuser"
+aws_access_key_id=MYACCESSKEY000000000
+aws_secret_access_key=thisisthesecretaccesskey01234567890ABCDE
+mfa_serial=arn:aws:iam::012345678901:mfa/myuser
 ```
 
 Run the command and when prompted, enter the MFA token code shown on your device.
@@ -97,13 +97,13 @@ _WARNING: This advanced use case will overwrite your default profile credentials
 
 In this scenario, you configure a "login" profile with your AWS credentials, **awsmfa** will then update your "default" profile with the temporary credentials.
 
-For example:
+**~/.aws/credentials**
 
 ```ini
 [login]
-aws_access_key_id: "MYACCESSKEY000000000",
-aws_secret_access_key: "thisisthesecretaccesskey01234567890ABCDE",
-mfa_serial:"arn:aws:iam::012345678901:mfa/myuser"
+aws_access_key_id=MYACCESSKEY000000000
+aws_secret_access_key=thisisthesecretaccesskey01234567890ABCDE
+mfa_serial=arn:aws:iam::012345678901:mfa/myuser
 ```
 
 Run the command and when prompted, enter the MFA token code shown on your device.
@@ -120,11 +120,24 @@ For example, using the AWS CLI:
 aws s3 ls
 ```
 
+Alternatively, if you use profiles to "assume roles". Configure your "profiles" in the **~/.aws/config** file as follows for easy MFA usage.
+
+**~/.aws/config**
+
+```ini
+[profile devops]
+region = ap-southeast-2
+role_arn = arn:aws:iam::012345678901:role/devops-crew
+source_profile = mfa
+```
+
+You can now authenticate with "awsmfa" and seamlessly use your "devops" profile to assume roles.
+
 ### Non-Interactive
 
 The tool can also be run non-interactive for further automation or scripting.
 
-In this example we enter the MFA code programmatically, authenticate with the "foo" profile and write credentials to the profile "coolio"
+In this example we enter the MFA code programmatically, authenticate with the "foo" profile and write our MFA credentials to the profile "coolio"
 
 ```bash
 awsmfa -t 012345 -p foo --mfa-profile coolio
