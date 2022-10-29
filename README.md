@@ -52,8 +52,8 @@ npx @herdingbits/awsmfa
 
 ## Usage
 
-1. Run the tool to automatically create a "mfa" profile inside your credentials file with a running MFA AWS Session.
-2. Use the created "mfa" profile anywhere you can specify an AWS "profile"
+1. Run the tool to automatically create a "mfa" profile inside your credentials file using your MFA session.
+2. Use the created "mfa" profile anywhere you can specify an AWS "profile".
 
 This is especially useful inside the ~/.aws/config file as a "source_profile" for assuming roles securely.
 
@@ -61,7 +61,7 @@ However, it is also a good fit for working securely with the AWS-CLI, Serverless
 
 For basic help run:
 
-```
+```bash
 awsmfa --help
 ```
 
@@ -80,14 +80,14 @@ mfa_serial=arn:aws:iam::012345678901:mfa/myuser
 
 Run the command and when prompted, enter the MFA token code shown on your device.
 
-```
+```bash
 awsmfa
 ```
 
-The tool will not display any messages if successful. You can now use the automatically generated/update "mfa" profile to make calls to the AWS APIs.
+The tool will not display any messages if successful. You can now use the automatically generated or update "mfa" profile to make calls to the AWS APIs.
 For example, using the AWS CLI:
 
-```
+```bash
 aws s3 ls --profile mfa
 ```
 
@@ -109,14 +109,15 @@ mfa_serial=arn:aws:iam::012345678901:mfa/myuser
 Run the command and when prompted, enter the MFA token code shown on your device.
 
 ```bash
-awsmfa -p login
+# WARNING: This advanced use case will overwrite your default profile credentials.
+awsmfa -p login --mfa-profile default
 ```
 
-You can now just run any AWS command and it will use the default profile which is set to the temporary credentials.
+You can now just run any AWS command and it will use the default profile which is set to use your MFA session.
 
 For example, using the AWS CLI:
 
-```
+```bash
 aws s3 ls
 ```
 
