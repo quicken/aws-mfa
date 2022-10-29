@@ -1,10 +1,20 @@
 # AWS MFA
 
-This tool automatically creates a temporary profile inside the credentials file that has been authenticated with MFA.
+This command-line tool automatically creates a temporary profile inside the credentials file that has been authenticated with MFA.
 
 Several variations of this type of tool already exist in various programming languages with a mix of features.
 
 I needed something that worked with node, was less opinionated and provided some flexibility missing in some of the alternatives.
+
+Hope this tool makes your life easier in AWS Land.
+
+Cheers
+
+Marcel 😎👍
+
+- #herdingbits
+- Youtube: https://youtube.com/herdingbits
+- Blog: https://www.herdingbits.com
 
 ## Prerequisites
 
@@ -42,12 +52,12 @@ npx @herdingbits/awsmfa
 
 ## Usage
 
-1. Run the tool to create a "mfa" profile with a running MFA AWS Session.
-2. Use the created "mfa" profile with anywhere you can specify a "profile"
+1. Run the tool to automatically create a "mfa" profile inside your credentials file with a running MFA AWS Session.
+2. Use the created "mfa" profile anywhere you can specify an AWS "profile"
 
 This is especially useful inside the ~/.aws/config file as a "source_profile" for assuming roles securely.
 
-However, it is also a good fit for working securly with the AWS-CLI, Serverless Offline as well as the AWS SDKs.
+However, it is also a good fit for working securely with the AWS-CLI, Serverless Offline as well as the AWS SDKs.
 
 For basic help run:
 
@@ -55,36 +65,83 @@ For basic help run:
 awsmfa --help
 ```
 
-### Interactive
+### Basic Interactive Usage
 
-In the simplest usage:
+For a basic setup, add your serial number to the profile that is linked to your MFA device to your **~/.aws/credentials** file.
+
+For example:
+
+```ini
+[default]
+aws_access_key_id: "MYACCESSKEY000000000",
+aws_secret_access_key: "thisisthesecretaccesskey01234567890ABCDE",
+mfa_serial:"arn:aws:iam::012345678901:mfa/myuser"
+```
+
+Run the command and when prompted, enter the MFA token code shown on your device.
 
 ```
 awsmfa
 ```
 
-When prompted, enter the MFA token code that is shown on the MFA device that is set for the profile (using the "mfa_serial" property).
+The tool will not display any messages if successful. You can now use the automatically generated/update "mfa" profile to make calls to the AWS APIs.
+For example, using the AWS CLI:
 
-The tool will then acquire a session token using the "default" profile and create or overwrite the "mfa" profile inside the credentials file.
+```
+aws s3 ls --profile mfa
+```
 
-### Arguments
+### Advanced Usage
 
-#### -d, --duration-seconds
+_WARNING: This advanced use case will overwrite your default profile credentials._
 
-    The duration in seconds, that the credentials should remain valid. Valid ranges are between 900 seconds (15 minutes) to 129,600 seconds (36 hours), with 43,200 seconds (12 hours) as the default.
+In this scenario, you configure a "login" profile with your AWS credentials, **awsmfa** will then update your "default" profile with the temporary credentials.
 
-#### -p, --profile
+For example:
 
-    Use a specific profile from the credentials file. Note: This works differently to the AWS CLI in that profiles defined in the ~~.aws/config~~ file are ignored.
+```ini
+[login]
+aws_access_key_id: "MYACCESSKEY000000000",
+aws_secret_access_key: "thisisthesecretaccesskey01234567890ABCDE",
+mfa_serial:"arn:aws:iam::012345678901:mfa/myuser"
+```
 
-#### -s, --serial-number
+Run the command and when prompted, enter the MFA token code shown on your device.
 
-    The identification number of the MFA device that is associated with the IAM user requiring MFA.
+```bash
+awsmfa -p login
+```
 
-#### -t, --tokenCode
+You can now just run any AWS command and it will use the default profile which is set to the temporary credentials.
 
-    The value provided by the MFA device. If this argument is omitted the command will pause and prompt the user for the token code.
+For example, using the AWS CLI:
 
-#### --mfa-profile
+```
+aws s3 ls
+```
 
-    The profile that temporary credentials are written to. Defaults to "mfa".
+### Non-Interactive
+
+The tool can also be run non-interactive for further automation or scripting.
+
+In this example we enter the MFA code programmatically, authenticate with the "foo" profile and write credentials to the profile "coolio"
+
+```bash
+awsmfa -t 012345 -p foo --mfa-profile coolio
+```
+
+## Command-line Arguments
+
+| Argument               | Description                                                                                                                                                                                                |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -d, --duration-seconds | The duration in seconds, that the credentials should remain valid. Valid ranges are between 900 seconds (15 minutes) to 129,600 seconds (36 hours), with 43,200 seconds (12 hours) as the default.         |
+| -h, --help             | Show help.                                                                                                                                                                                                 |
+| -p, --profile          | Use the specific profile from the credentials file for getting the session. Note: This works differently to the AWS CLI in that profiles defined in the ".aws/config" file are ignored.                    |
+| -s, --serial-number    | The identification number of the MFA device that is associated with the IAM user requiring MFA. The serial number can also be set for the profile in the credentials file using the "mfa_serial" property. |
+| -t, --tokenCode        | The value provided by the MFA device. If this argument is omitted the command will pause and prompt the user for the token code.                                                                           |
+| --mfa-profile          | The profile that temporary credentials are written to. Defaults to "mfa".                                                                                                                                  |
+| --version              | Display version information.                                                                                                                                                                               |
+
+## Change Logs
+
+https://github.com/quicken/aws-mfa/blob/master/CHANGELOG.md

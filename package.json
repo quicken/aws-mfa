@@ -1,6 +1,6 @@
 {
   "name": "@herdingbits/awsmfa",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Manages the AWS credentials file when working with MFA enabled accounts.",
   "license": "MIT",
   "author": "Marcel Scherzer",
