@@ -127,13 +127,14 @@ $RECYCLE.BIN/
 
 
 # End of https://www.gitignore.io/api/osx,node,linux,windows
-yarn-error.log
-.aws-sam
+
+# Extras
 dist/
-converage/
-.serverless
-.dynamodb
-shared-local-instance.db
-.build
 /**/foo.ts
 /**/docs/sdk/
+.aws-sam
+.build
+.dynamodb
+.serverless
+yarn-error.log
+shared-local-instance.db
