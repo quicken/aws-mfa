@@ -6,8 +6,8 @@ import { ValidationException } from "./ValidationException";
 /**
  * Defines the configuration that is used when executing this command.
  */
-type CommandConfiguration = {
-    tokenCode?: number;
+export type CommandConfiguration = {
+    tokenCode?: string;
     profile: string;
     durationSeconds: number;
     serialNumber?: string;
@@ -60,7 +60,7 @@ export class ConfigTool {
             .option("t", {
                 alias: "token-code",
                 describe: "The value provided by the MFA device.",
-                type: "number",
+                type: "string",
                 demandOption: false
             })
             .option("mfa-profile", {
@@ -122,7 +122,7 @@ export class ConfigTool {
             );
         }
 
-        if (!config.tokenCode || isNaN(config.tokenCode) || config.tokenCode.toString().length != 6) {
+        if (!config.tokenCode || config.tokenCode.length != 6) {
             throw new ValidationException(
                 "The token must be numeric and exactly 6 digits. Token is the token code that is displayed on your MFA device."
             );
@@ -131,12 +131,6 @@ export class ConfigTool {
         if (config.profile === config.mfaProfile) {
             throw new ValidationException(
                 "Profile and MFA Profile can not be the same value to prevent overwriting your credentials."
-            );
-        }
-
-        if (config.mfaProfile === "default") {
-            throw new ValidationException(
-                'MFA Profile can not be set to "default" to prevent overwriting your credentials.'
             );
         }
 

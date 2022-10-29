@@ -17,7 +17,7 @@ import { ValidationException } from "./ValidationException";
         /* Get configuration from args and/or by prompting the user. */
         const config = await ConfigTool.readArgs();
         if (!config.tokenCode) {
-            config.tokenCode = await ConfigTool.promptForToken(config.profile);
+            config.tokenCode = (await ConfigTool.promptForToken(config.profile)).toString();
         }
 
         const credentialsEntry = store[config.profile] as CredentialsEntry;
