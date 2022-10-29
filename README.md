@@ -32,6 +32,8 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-role.html#cli-con
 
 ## Installation
 
+https://www.npmjs.com/package/@herdingbits/awsmfa
+
 For npm users:
 
 ```
@@ -53,7 +55,7 @@ npx @herdingbits/awsmfa
 ## Usage
 
 1. Run the tool to automatically create a "mfa" profile inside your credentials file using your MFA session.
-2. Use the created "mfa" profile anywhere you can specify an AWS "profile".
+2. Use the created "mfa" profile anywhere you can specify an AWS profile.
 
 This is especially useful inside the ~/.aws/config file as a "source_profile" for assuming roles securely.
 
@@ -159,3 +161,7 @@ awsmfa -t 012345 -p foo --mfa-profile coolio
 ## Change Logs
 
 https://github.com/quicken/aws-mfa/blob/master/CHANGELOG.md
+
+Please report any errors or make feature requests on GitHub.
+
+https://github.com/quicken/aws-mfa/issues
