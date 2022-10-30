@@ -9,6 +9,9 @@
     "type": "git",
     "url": "https://github.com/quicken/aws-mfa.git"
   },
+  "bugs": {
+    "url": "https://github.com/quicken/aws-mfa/issues"
+  },
   "keywords": [
     "aws mfa",
     "herdingbits",
