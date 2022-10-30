@@ -1,5 +1,7 @@
 # AWS MFA
 
+![GitHub issues](https://img.shields.io/github/issues/quicken/aws-mfa)
+
 This command-line tool automatically creates a temporary profile inside the credentials file that has been authenticated with MFA.
 
 Several variations of this type of tool already exist in various programming languages with a mix of features.
@@ -15,6 +17,8 @@ Marcel 😎👍
 - #herdingbits
 - Youtube: https://youtube.com/herdingbits
 - Blog: https://www.herdingbits.com
+
+![Your Repository's Stats](https://github-readme-stats.vercel.app/api?username=quicken&show_icons=true&hide=commits,prs,issues,contribs)
 
 ## Prerequisites
 
