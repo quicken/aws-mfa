@@ -106,7 +106,7 @@ export class ConfigTool {
         };
         prompt.start();
         const { tokenCode } = await prompt.get(schema);
-        return parseInt(tokenCode as string, 10);
+        return tokenCode;
     };
 
     /**
